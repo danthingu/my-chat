@@ -17,6 +17,7 @@ export class ChatFormComponent implements OnInit {
 
   send() {
     this.chat.sendMessage(this.message); // POST message to FIREBASE database <--- SEND BUTTON
+    this.message = '';
   }
 
   handleSubmit(event) {
