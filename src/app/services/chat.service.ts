@@ -20,17 +20,32 @@ export class ChatService {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
       }
+
+      this.getCurrentUserAuthenticated().subscribe(a => {
+        this.userName = a.displayName;
+      });
     });
+   }
+
+   getCurrentUserAuthenticated() {
+    const userId = this.user.uid;
+    const path = `/users/${userId}`;
+     return this.db.object(path);
+   }
+
+   getAllUsers() {
+    const path =`/users`;
+    return this.db.list(path);
    }
 
   sendMessage(msg: string) {
     const timestamp = this.getTimeStamp();
-    const email = 'danny@gmail.com';
+    const email = this.user.email
     this.chatMessagesList = this.getMessages();
     this.chatMessagesList.push({
       message: msg,
       timeSent: timestamp,
-      username: 'testing-here',
+      username: this.userName,
       email: email});
 
       console.log('This is triggered form sendMessage()');

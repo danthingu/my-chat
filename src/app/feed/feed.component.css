@@ -4,6 +4,6 @@
 }
 
 .message{
-    flex-direction: column;
+    /* flex-direction: column; */
     margin: 10px 0;
 }
